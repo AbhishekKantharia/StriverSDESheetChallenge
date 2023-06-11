@@ -1,0 +1,94 @@
+Problem Statement
+
+You are given an integer N. Your task is to return a 2-D ArrayList containing the pascal’s triangle till the row N.
+A Pascal's triangle is a triangular array constructed by summing adjacent elements in preceding rows. Pascal's triangle contains the values of the binomial coefficient. For example in the figure below.
+
+
+For example, given integer N= 4 then you have to print.
+1  
+1 1 
+1 2 1 
+1 3 3 1
+
+Here for the third row, you will see that the second element is the summation of the above two-row elements i.e. 2=1+1, and similarly for row three 3 = 1+2 and 3 = 1+2.
+Detailed explanation ( Input/output format, Notes, Images )
+
+Constraints:
+1 <= T <= 40
+1 <= N <= 50
+
+Time Limit: 1 sec
+Sample Input 1 :
+3
+1
+2
+3
+Sample Output 1 :
+1
+1 
+1 1 
+1 
+1 1 
+1 2 1 
+Explanation Of The Sample Input 1:
+For the first test case:
+The given integer N = 1 you have to print the triangle till row 1 so you just have to output 1.
+
+For the second test case:
+The given integer N = 2 you have to print the triangle till row 2 so you have to output 
+1
+1 1
+
+For the third test case
+The given integer N = 3 you have to print the triangle till row 3 so you have to output 
+1
+1 1
+1 2 1
+Sample Input 2 :
+3
+4
+5
+6
+Sample Output 2 :
+1 
+1 1 
+1 2 1
+1 3 3 1 
+1 
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1
+1 
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1
+1 5 10 10 5 1
+
+## Solution:-
+
+#include <bits/stdc++.h>
+vector<long long int> level(vector<long long int> prev) {
+  vector<long long int> temp;
+  temp.push_back(1);
+  for(int i=1; i<prev.size(); i++) {
+    long long int t = prev[i-1]+prev[i];
+    temp.push_back(t);
+  }
+  temp.push_back(1);
+  return temp;
+}
+
+vector<vector<long long int>> printPascal(int n) {
+  vector<vector<long long int>> ans;
+  vector<long long int> a;
+  a.push_back(1);
+  ans.push_back(a);
+  n--;
+  int cnt = 0;
+  while(n--) {
+    ans.push_back(level(ans[cnt++]));
+  }
+  return ans;
+}
